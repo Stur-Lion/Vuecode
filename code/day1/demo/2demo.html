@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<div id="app" style="width: 700px;margin: 0 auto">
+    <label>
+        编号：<input type="text" v-model="num"/>
+    </label>
+    <label>
+        内容：<input type="text" v-model="con"/>
+    </label>
+    <button @click="add">添加</button>
+    <br/>
+    <br/>
+    <table style="width: 100%;text-align: center" border="1px" cellspacing="0" cellpadding="3">
+        <thead>
+            <tr>
+                <td>编号</td>
+                <td>内容</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="( index,item) in list">
+                <td width="15%">{{item.num}}</td>
+                <td width="70%">{{item.con}}</td>
+                <td width="15%"><a href="javascript:;" @click="delet" value="{{item.id}}">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            list:[{num:1,con:'版啦啦啦',id:0}],
+            num:'',
+            con:'',
+            id:0
+        },
+        methods:{
+            add:function(){
+                var num = this.num;
+                var con = this.con;
+                if(num==''||con==''){
+                    return
+                }
+                this.list.push({num:num,con:con,id:++this.id});
+                this.num = this.con = ''
+            },
+            delet:function(e){
+                if(!confirm('删除数据')){
+                    return
+                }
+                var index = this.list.findIndex(function(item){
+                    return item.id== e.target.getAttribute('value')
+                })
+                this.list.splice(index,1)
+            }
+        }
+    })
+</script>
+</html>

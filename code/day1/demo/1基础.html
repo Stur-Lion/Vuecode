@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<style>
+    hr{
+        height: 5px;
+        background-color: deepskyblue;
+        border: none;
+    }
+</style>
+<div id="app">
+    <p>{{name}}</p>
+    <hr/>
+    <input type="text" value="{{num}}"/>
+    <button @click="add()">加一</button>
+    <hr/>
+    <div v-text="html"></div>
+    <div v-html="html"></div>
+    <hr/>
+    <div v-cloak>{{cloak}}</div>
+    <hr/>
+    <div :value="bind">bind</div>
+    <hr/>
+    <input type="text" v-model="model.name"/>
+    <input type="text" v-model="model.age"/>
+    <button @click="console">打印</button>
+    <hr/>
+    <ul>
+        <li v-for="(index,item) in list" :key="index">
+            {{item}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(key,item) in list2" :key="key">
+            {{item}}---{{key}}
+        </li>
+    </ul>
+    <hr/>
+    <div v-if='flag'>显示/隐藏</div>
+    <div v-show='flag'>显示/隐藏</div>
+    <button @click="change">切换</button>
+    <hr/>
+    <ul>
+        <li v-for="(index,item) in list3" v-if="item | datefmt">{{ item }}</li>
+    </ul>
+
+
+
+</div>
+
+</body>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            name:'lion',
+            num:1,
+            html:'<h1>测试</h1>',
+            cloak:'解决闪烁问题',
+            bind:'lion',
+            model:{
+                name:'ccking',
+                age:18
+            },
+            list:['lion','sheng','cheng','shuo'],
+            list2:{
+                a:'哈哈',
+                b:'怕怕',
+                c:'啧啧'
+            },
+            flag:true,
+            list3:[1,2,3,4,5]
+        },
+        methods:{
+            add: function () {
+                this.num++
+            },
+            console:function(){
+                console.log(this.model.name);
+                console.log(this.model.age);
+            },
+            change:function(){
+                this.flag=!this.flag
+            }
+        },
+        filters:{
+            datefmt:function(item){
+                console.log(item);
+                if(item<4){
+                    return item
+                }else{
+                    return false
+                }
+            }
+        }
+    })
+</script>
+</html>
