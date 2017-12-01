@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<div id="app">
+    <lion :mes="mes"></lion>
+</div>
+</body>
+</html>
+<template id="demo">
+    <div>
+        <p>{{mes}}</p>
+        <p>{{meg}}</p>
+    </div>
+</template>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            mes:'测试'
+        },
+        components:{
+            'lion':{
+                template:'#demo',
+                data:function(){
+                  return {
+                      meg:'zijide '
+                  }
+                },
+                props:['mes']
+            }
+        }
+    })
+    console.log(app);
+</script>

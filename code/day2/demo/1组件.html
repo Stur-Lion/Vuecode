@@ -7,11 +7,58 @@
 </head>
 <body>
 <div></div>
-<div id="app">
-
-</div>
+    <div id="app">
+        <kings></kings>
+    </div>
+    <div id="acc">
+        <lion></lion>
+    </div>
 </body>
+<script id="cc" type="x-template">
+    <div>
+        <p @click="alert">尝试一下</p>
+        <p>自检</p>
+        <p>{{msg}}</p>
+    </div>
+</script>
+<template id="kings">
+    <div class="a">
+        <p>{{msg}}</p>
+        <p>{{msga}}</p>
+    </div>
+</template>
 <script>
-
+    Vue.component('lion',{
+        template:'#cc',
+        data:function(){
+            return {
+                msg:'组件数据'
+            }
+        },
+        methods:{
+            alert:function(){
+                console.log(this);
+                console.log(this.msg);
+            }
+        }
+    })
+    var app = new Vue({
+        el:'#app',
+        components:{
+            'kings':{
+                template:'#kings',
+                data:function(){
+                    console.log(this);
+                    return {
+                        msg:'局部组件数据',
+                        msga:'局部组件数据1'
+                    }
+                }
+            }
+        }
+    })
+    var app = new Vue({
+        el:'#acc',
+    })
 </script>
 </html>
