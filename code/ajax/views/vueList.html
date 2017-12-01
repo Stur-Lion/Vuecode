@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="/js/vue1026.js"></script>
+    <script src="/js/vue-resource121.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for='item in list'>
+            {{item}}
+        </li>
+    </ul>
+    <button @click="getList">点击</button>
+    <button @click="getListother">点击</button>
+    <button @click="postData">post</button>
+</div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            list:[1,2,3]
+        },
+        methods:{
+            getList:function(){
+                this.$http.get('http://localhost:3000/data').then(function(res){
+                    console.log(res);
+                    this.list=res.body.list
+                })
+            },
+            getListother:function(){
+                this.$http.get('http://localhost:3000/dataother').then(function(res){
+                    console.log(res);
+                    this.list=res.body.list
+                })
+            },
+            postData:function(){
+                this.$http.post('http://localhost:3000/postData').then(function(res){
+                    console.log(res);
+                    this.list=res.body.list
+                })
+            },
+        }
+    })
+</script>

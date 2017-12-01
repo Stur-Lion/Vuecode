@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="/vue1026.js"></script>
+    <script src="/vue-resource121.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+
+    </ul>
+    <button @click="getList">点击</button>
+</div>
+</body>
+</html>
+
+<script>
+new Vue({
+    el:'#app',
+    data:{
+        list:[]
+    },
+    methods:{
+        getList:function(){
+            console.log(1);
+            this.$http.jsonp('http://172.17.16.236:3000/vuedata')
+                    .then(function(response){
+                        console.log(response);
+                        // 将服务器中的数据获取赋值给obj
+                        this.obj = response.body;
+                    })
+        }
+    }
+})
+</script>
