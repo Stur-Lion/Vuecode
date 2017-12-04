@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .show-transition{
+            transition: all 0.4s ease;
+            padding-left: 10px;
+        }
+    </style>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="change">点击</button>
+        <div v-show="flag" tansition="">hello world</div>
+    </div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+          flag:false
+        },
+        methods:{
+            change:function(){
+                this.flag=!this.flag
+            }
+        }
+    })
+</script>

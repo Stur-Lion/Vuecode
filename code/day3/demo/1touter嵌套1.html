@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue1026.js"></script>
+    <script src="../vue-router1.0.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>大盒子</p>
+    <a href="#" v-link="{path:'/index/login'}">注册</a>
+    <a href="#" v-link="{path:'/index/register'}">登录</a>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script type="x-template" id="index">
+    <div>
+        <p>根组件</p>
+        <router-view></router-view>
+    </div>
+</script>
+<script>
+    var vuerouter = new VueRouter()
+    var app = Vue.extend({})
+    var index =  Vue.extend({
+        template:'#index'
+    });
+    var login = Vue.extend({
+        template:'<h1>注册</h1>'
+    })
+    var register = Vue.extend({
+        template:'<h1>登录</h1>'
+    })
+
+    vuerouter.map({
+        index:{
+            component:index,
+            subRoutes:{
+                login:{
+                    component:login
+                },
+                register:{
+                    component:register
+                }
+            }
+        }
+    })
+    vuerouter.start(app,'#app');
+    vuerouter.redirect({'/':'/index/login'})
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue1026.js"></script>
+    <script src="../vue-router1.0.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <a href="#" v-link="{path:'/login'}">登录</a>
+    <a href="#" v-link="{path:'/register/300'}">注册</a>
+
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script>
+    var app = Vue.extend({})
+
+    var login = Vue.extend({
+        template:'<h1>注册页面</h1>'
+    })
+
+    var register = Vue.extend({
+        template:'<h1>登录页面{{id}}</h1>',
+        data:function(){
+            return {
+                id:0
+            }
+        },
+        created:function(){
+            this.id=this.$route.params.id
+        }
+    })
+
+    var router = new VueRouter();
+    router.map({
+        'login':{
+            component:login
+        },
+        'register/:id':{
+            component:register
+        }
+    })
+    router.start(app,'#app')
+
+    router.redirect({'':'/login'})
+</script>
