@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../vue221.js"></script>
+    <script src="../vue-router231.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>根组件</p>
+    <router-link to="/index/login">登录</router-link>
+    <router-link to="/index/regist/300">注册</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script type="x-template" id="index">
+<div>
+    <p>父组件</p>
+    <router-view></router-view>
+</div>
+</script>
+<script>
+    var index = Vue.extend({
+        template:'#index'
+    })
+    var login = Vue.extend({
+        template:'<h1>登录</h1>'
+    })
+    var regist = Vue.extend({
+        template:'<h1>注册{{id}}</h1>',
+        data:function(){
+            return {
+                id:0
+            }
+        },
+        created:function(){
+            this.id = this.$route.params.id
+        }
+    })
+    var router = new VueRouter({
+        routes:[
+            {
+                path:'/index',
+                component:index,
+                children:[
+                    {
+                        path:'login',
+                        component:login
+                    },
+                    {
+                        path:'regist/:id',
+                        component:regist
+                    }
+                ]
+            },
+            {
+                path:'/',
+                redirect:'/index/regist/300'
+            }
+        ]
+    })
+    new Vue({
+        el:'#app',
+        router:router
+    })
+</script>
