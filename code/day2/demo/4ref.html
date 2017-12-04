@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../vue221.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="get">点击</button>
+    <div id="div" ref="mydiv">哇咔咔</div>
+    <button @click="getLion">点击2</button>
+    <lion ref="lion"></lion>
+</div>
+</body>
+</html>
+<script>
+    new Vue({
+        el:'#app',
+        methods:{
+            get:function(){
+                console.log(this.$refs.mydiv.innerHTML);
+            },
+            getLion:function(){
+                console.log(this.$refs.lion.name);
+            }
+        },
+        components:{
+            lion:{
+                template:'<p>这是一个子组件</p>',
+                data:function(){
+                    return{
+                        name:'子组件'
+                    }
+                }
+            }
+        }
+    })
+</script>
